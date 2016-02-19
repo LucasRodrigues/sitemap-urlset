@@ -12,7 +12,6 @@ export default class Generator {
 
     let urlSet = [];
     urlsChunks.forEach(urlsChunk => {
-
       const template = `
         <?xml version="1.0" encoding="utf-8"?>
         <urlset
@@ -24,7 +23,6 @@ export default class Generator {
 
       urlSet.push(template);
     });
-
 
     return urlSet;
   }
