@@ -1,11 +1,11 @@
 export default class ChangeFreqValidator{
 
-  static validate (changeFreq){
+  static validate (item){
 
     const acceptValues = ['always',
       'hourly','daily','weekly',
       'monthly','anual','never'];
 
-    return acceptValues.indexOf(changeFreq) >= 0;
+    return acceptValues.indexOf(item.changeFreq) >= 0;
   }
 }

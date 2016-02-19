@@ -1,12 +1,12 @@
 
 export default class LocValidator{
 
-  static validate (loc){
+  static validate (item){
     const validators = [this._validateLength];
     let isValid = true;
 
     validators.forEach(validator => {
-      isValid &= validator(loc);
+      isValid &= validator(item.loc);
     });
   }
 
