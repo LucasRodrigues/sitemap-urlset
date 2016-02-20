@@ -1,5 +1,5 @@
 
-export default class PriorityValidator {
+export default class UrlPriorityValidator {
 
   static validate(item) {
     let result = {

@@ -1,23 +1,22 @@
-import ChangeFreqValidator from './changeFreqValidator';
-import LocValidator from './locValidator';
-import PriorityValidator from './priorityValidator';
+import UrlValidator from './urlValidator';
 
 export default class Validator {
 
-  static validate(item) {
-    const validators = [ChangeFreqValidator, LocValidator,
-      PriorityValidator];
-
+  static validate(items) {
     let result = {
       status: true,
       messages: []
     };
-    validators.forEach(validator => {
-      const validatorResult = validator(item);
 
-      result.status &= validatorResult.status;
-      if (!validatorResult.status) {
-        result.messages.concat(validatorResult.messages);
+    items.forEach((item, index) => {
+      const itemResult = UrlValidator.validate(item);
+
+      if (!itemResult.status) {
+        result.status = false;
+        result.messages.push({
+          index: index,
+          messages: itemResult.messages
+        });
       }
     });
 

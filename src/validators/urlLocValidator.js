@@ -1,5 +1,4 @@
-
-export default class LocValidator {
+export default class UrlLocValidator {
 
   static validate(item) {
     const validators = [this._validateLength, this._shouldNotBeNullOrEmpty];

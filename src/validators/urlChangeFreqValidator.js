@@ -1,4 +1,4 @@
-export default class ChangeFreqValidator {
+export default class UrlChangeFreqValidator {
 
   static validate(item) {
     let result = {
