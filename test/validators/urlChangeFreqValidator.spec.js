@@ -1,4 +1,4 @@
-import UrlChangeFreqValidator from '../../src/validators/urlChangeFreqValidator';
+import sut from '../../src/validators/urlChangeFreqValidator';
 import test from 'ava';
 
 test('validate - case is null', t => {
@@ -11,7 +11,7 @@ test('validate - case is null', t => {
   };
 
   // Act
-  const result = UrlChangeFreqValidator.validate(testCase);
+  const result = sut.validate(testCase);
 
   // Assert
   t.same(expectedResult,result);
@@ -27,7 +27,7 @@ test('validate - case is empty', t => {
   };
 
   // Act
-  const result = UrlChangeFreqValidator.validate(testCase);
+  const result = sut.validate(testCase);
 
   // Assert
   t.same(expectedResult,result);
@@ -43,7 +43,7 @@ test('validate - case is undefined', t => {
   };
 
   // Act
-  const result = UrlChangeFreqValidator.validate(testCase);
+  const result = sut.validate(testCase);
 
   // Assert
   t.same(expectedResult,result);
@@ -59,7 +59,7 @@ test('validate - case is valid option - always', t => {
   };
 
   // Act
-  const result = UrlChangeFreqValidator.validate(testCase);
+  const result = sut.validate(testCase);
 
   // Assert
   t.same(expectedResult,result);
@@ -75,7 +75,7 @@ test('validate - case is valid option - AlwAyS', t => {
   };
 
   // Act
-  const result = UrlChangeFreqValidator.validate(testCase);
+  const result = sut.validate(testCase);
 
   // Assert
   t.same(expectedResult,result);
@@ -91,7 +91,7 @@ test('validate - case is valid option - hourly', t => {
   };
 
   // Act
-  const result = UrlChangeFreqValidator.validate(testCase);
+  const result = sut.validate(testCase);
 
   // Assert
   t.same(expectedResult,result);
@@ -107,7 +107,7 @@ test('validate - case is valid option - daily', t => {
   };
 
   // Act
-  const result = UrlChangeFreqValidator.validate(testCase);
+  const result = sut.validate(testCase);
 
   // Assert
   t.same(expectedResult,result);
@@ -123,7 +123,7 @@ test('validate - case is valid option - weekly', t => {
   };
 
   // Act
-  const result = UrlChangeFreqValidator.validate(testCase);
+  const result = sut.validate(testCase);
 
   // Assert
   t.same(expectedResult,result);
@@ -139,7 +139,7 @@ test('validate - case is valid option - monthly', t => {
   };
 
   // Act
-  const result = UrlChangeFreqValidator.validate(testCase);
+  const result = sut.validate(testCase);
 
   // Assert
   t.same(expectedResult,result);
@@ -155,7 +155,7 @@ test('validate - case is valid option - anual', t => {
   };
 
   // Act
-  const result = UrlChangeFreqValidator.validate(testCase);
+  const result = sut.validate(testCase);
 
   // Assert
   t.same(expectedResult,result);
@@ -171,7 +171,7 @@ test('validate - case is valid option - never', t => {
   };
 
   // Act
-  const result = UrlChangeFreqValidator.validate(testCase);
+  const result = sut.validate(testCase);
 
   // Assert
   t.same(expectedResult,result);
@@ -188,7 +188,7 @@ test('validate - case is not valid option - bla', t => {
   };
 
   // Act
-  const result = UrlChangeFreqValidator.validate(testCase);
+  const result = sut.validate(testCase);
 
   // Assert
   t.same(expectedResult,result);
@@ -205,7 +205,7 @@ test('validate - case is not valid option - fail', t => {
   };
 
   // Act
-  const result = UrlChangeFreqValidator.validate(testCase);
+  const result = sut.validate(testCase);
 
   // Assert
   t.same(expectedResult,result);
