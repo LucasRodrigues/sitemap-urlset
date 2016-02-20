@@ -8,15 +8,9 @@ export default class Orchestrator {
       const itemsValidator = Validator.validate(items);
 
       if (itemsValidator.status) {
-        resolve({
-          status: true,
-          urlSet: Generator.generate(items)
-        });
+        resolve(Generator.generate(items));
       } else {
-        rejected({
-          status: false,
-          messages: itemsValidator.messages
-        });
+        rejected(itemsValidator.messages);
       }
     });
   }
