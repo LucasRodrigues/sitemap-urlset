@@ -57,7 +57,7 @@ test('validate - case url length 2047', t => {
     status: true
   };
   const testCase = {
-    loc: 'a'.repeat(2047)
+    loc: 'http://' + 'a'.repeat(2040)
   };
 
   // Act
@@ -73,7 +73,7 @@ test('validate - case url length 2048', t => {
     status: true
   };
   const testCase = {
-    loc: 'a'.repeat(2048)
+    loc: 'http://' + 'a'.repeat(2041)
   };
 
   // Act
@@ -90,7 +90,42 @@ test('validate - case url length 2049', t => {
     messages: ['Loc size limit is 2048']
   };
   const testCase = {
-    loc: 'a'.repeat(2049)
+    loc: 'http://' + 'a'.repeat(2042)
+  };
+
+  // Act
+  const result = sut.validate(testCase);
+
+  // Assert
+  t.same(expectedResult,result);
+});
+
+test('validate - case url invalid format', t => {
+  // Arrange
+  const expectedResult = {
+    status: false,
+    messages: ['Loc value ://a is not a valid web uri']
+  };
+  const testCase = {
+    loc: '://a'
+  };
+
+  // Act
+  const result = sut.validate(testCase);
+
+  // Assert
+  t.same(expectedResult,result);
+});
+
+test('validate - case url invalid format and length', t => {
+  // Arrange
+  const expectedResult = {
+    status: false,
+    messages: ['Loc size limit is 2048',
+      'Loc value ' + '://a'.repeat(1000) +' is not a valid web uri']
+  };
+  const testCase = {
+    loc: '://a'.repeat(1000)
   };
 
   // Act

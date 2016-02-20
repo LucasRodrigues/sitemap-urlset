@@ -1,26 +1,36 @@
+import validUrl from 'valid-url';
+
 export default class UrlLocValidator {
 
   static validate(item) {
     let result = {
       status: true
     };
-    const requiredResult = this._shouldNotBeNullOrEmpty(item.loc);
+    const requiredResult = this._required(item.loc);
 
     if (!requiredResult.status) {
       result.status = false;
       result.messages = [requiredResult.message];
     } else {
-      const lengthResult = this._validateLength(item.loc);
-      if (!lengthResult.status) {
-        result.status = false;
-        result.messages = [lengthResult.message];
-      }
+      const rules = [this._validateLength,
+        this._isWebUri];
+
+      rules.forEach(rule =>{
+        const ruleResult = rule(item.loc);
+
+        if(!ruleResult.status){
+          result.status = false;
+          result.messages = result.messages || [];
+          result.messages.push(ruleResult.message);
+        }
+
+      });
     }
 
     return result;
   }
 
-  static _shouldNotBeNullOrEmpty(loc) {
+  static _required(loc) {
     return loc ?
       {
         status: true
@@ -29,6 +39,19 @@ export default class UrlLocValidator {
         status: false,
         message: 'Loc is not defined, this property is required'
       };
+  }
+
+  static _isWebUri(loc){
+    let result = {
+      status: true
+    };
+
+    if(!validUrl.isWebUri(loc)){
+      result.status = false;
+      result.message = `Loc value ${loc} is not a valid web uri`
+    }
+
+    return result;
   }
 
   static _validateLength(loc) {
