@@ -8,23 +8,22 @@ export default class UrlLocValidator {
     };
     const requiredResult = this._required(item.loc);
 
-    if (!requiredResult.status) {
-      result.status = false;
-      result.messages = [requiredResult.message];
-    } else {
+    if (requiredResult.status) {
       const rules = [this._validateLength,
         this._isWebUri];
 
-      rules.forEach(rule =>{
+      rules.forEach(rule => {
         const ruleResult = rule(item.loc);
 
-        if(!ruleResult.status){
+        if (!ruleResult.status) {
           result.status = false;
           result.messages = result.messages || [];
           result.messages.push(ruleResult.message);
         }
-
       });
+    } else {
+      result.status = false;
+      result.messages = [requiredResult.message];
     }
 
     return result;
@@ -41,14 +40,14 @@ export default class UrlLocValidator {
       };
   }
 
-  static _isWebUri(loc){
+  static _isWebUri(loc) {
     let result = {
       status: true
     };
 
-    if(!validUrl.isWebUri(loc)){
+    if (!validUrl.isWebUri(loc)) {
       result.status = false;
-      result.message = `Loc value ${loc} is not a valid web uri`
+      result.message = `Loc value ${loc} is not a valid web uri`;
     }
 
     return result;
