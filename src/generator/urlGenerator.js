@@ -1,7 +1,17 @@
 
 export default class UrlGenerator {
 
-  static generate(item) {
+  static generate(items) {
+    let result = '';
+
+    items.forEach(item => {
+      result += this._itemGenerate(item);
+    });
+
+    return result;
+  }
+
+  static _itemGenerate(item) {
     const template =
     `<url>
         <loc>${item.loc}</loc>

@@ -2,8 +2,8 @@
   "name": "site-map",
   "description": "Format messages to health check",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/LucasRodrigues/sitemap-urlset.git"
+    "type": "git",
+    "url": "https://github.com/LucasRodrigues/sitemap-urlset.git"
   },
   "version": "0.0.1",
   "license": "MIT",
@@ -14,13 +14,14 @@
   },
   "scripts": {
     "build": "gulp BUILD",
-    "style": "eslint ./src/*.js ./src/validators/*.js --fix",
+    "style": "eslint ./src/*.js ./src/validators/*.js ./src/generator/*.js --fix",
     "prepublish": "npm run build"
   },
   "main": "./index.js",
   "dependencies": {
+    "chunk": "0.0.2"
   },
-  "keywords":[
+  "keywords": [
     "sitemap",
     "urlset"
   ],
