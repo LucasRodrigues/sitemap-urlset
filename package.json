@@ -13,12 +13,15 @@
     "url": "https://github.com/LucasRodrigues"
   },
   "scripts": {
-    "build": "gulp BUILD",
-    "style": "eslint ./src/*.js ./src/validators/*.js ./src/generator/*.js --fix",
-    "prepublish": "npm run build"
+    "build:dev": "gulp BUILD_DEVELOPMENT",
+    "build:deploy": "gulp BUILD_DEPLOY",
+    "test": "ava ./lib/test/**/*.js",
+    "style": "eslint ./src/*.js ./src/validators/*.js ./test/generator/*.js ./test/*.js ./src/validators/*.js ./test/generator/*.js --fix",
+    "prepublish": "npm run build:deploy"
   },
   "main": "./index.js",
   "dependencies": {
+    "ava": "^0.12.0",
     "chunk": "0.0.2"
   },
   "keywords": [
