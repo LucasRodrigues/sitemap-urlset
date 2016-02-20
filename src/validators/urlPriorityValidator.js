@@ -17,7 +17,7 @@ export default class UrlPriorityValidator {
     const startRange = 0.0;
     const endRange = 1.0;
     const rule = (
-      (startRange >= priority) &&
+      (priority >= startRange) &&
       (priority <= endRange)
     );
 
@@ -27,7 +27,8 @@ export default class UrlPriorityValidator {
       } :
       {
         status: false,
-        messages: [`Priority should be between ${startRange} and ${endRange}`]
+        messages: [`Priority value ${priority} is not valid,`+
+        `should be between ${startRange} and ${endRange}`]
       };
   }
 }
