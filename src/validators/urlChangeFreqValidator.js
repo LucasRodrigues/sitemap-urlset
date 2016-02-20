@@ -2,8 +2,7 @@ export default class UrlChangeFreqValidator {
 
   static validate(item) {
     let result = {
-      status: true,
-      messages: []
+      status: true
     };
 
     if (item) {
