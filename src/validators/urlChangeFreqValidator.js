@@ -5,7 +5,7 @@ export default class UrlChangeFreqValidator {
       status: true
     };
 
-    if (item) {
+    if (item.changeFreq) {
       result = this._isAcceptedValue(item.changeFreq);
     }
 
@@ -18,7 +18,7 @@ export default class UrlChangeFreqValidator {
       'monthly', 'anual', 'never'];
 
     const rule =
-      acceptValues.indexOf(changeFreq) >= 0;
+      acceptValues.indexOf(changeFreq.toLowerCase()) >= 0;
 
     return rule ?
       {
@@ -26,7 +26,8 @@ export default class UrlChangeFreqValidator {
       } :
       {
         status: false,
-        messages: [`Value is different from accepts ${acceptValues}`]
+        messages: [`Value ${changeFreq} `+
+        `is different from accepts ${acceptValues}`]
       };
   }
 }
