@@ -27,7 +27,7 @@ export default class UrlPriorityValidator {
       } :
       {
         status: false,
-        messages: [`Priority value ${priority} is not valid,`+
+        messages: [`Priority value ${priority} is not valid,` +
         `should be between ${startRange} and ${endRange}`]
       };
   }

@@ -26,7 +26,7 @@ export default class UrlChangeFreqValidator {
       } :
       {
         status: false,
-        messages: [`Value ${changeFreq} `+
+        messages: [`Value ${changeFreq} ` +
         `is different from accepts ${acceptValues}`]
       };
   }

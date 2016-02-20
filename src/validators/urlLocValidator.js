@@ -1,20 +1,23 @@
 export default class UrlLocValidator {
 
   static validate(item) {
-    const validators = [this._validateLength, this._shouldNotBeNullOrEmpty];
     let result = {
-      status: true,
-      messages: []
+      status: true
     };
+    const requiredResult = this._shouldNotBeNullOrEmpty(item.loc);
 
-    validators.forEach(validator => {
-      const validatorResult = validator(item.loc);
-
-      result.status &= validatorResult.status;
-      if (!validatorResult.status) {
-        result.messages.push(validatorResult.message);
+    if (!requiredResult.status) {
+      result.status = false;
+      result.messages = [requiredResult.message];
+    } else {
+      const lengthResult = this._validateLength(item.loc);
+      if (!lengthResult.status) {
+        result.status = false;
+        result.messages = [lengthResult.message];
       }
-    });
+    }
+
+    return result;
   }
 
   static _shouldNotBeNullOrEmpty(loc) {
@@ -30,7 +33,7 @@ export default class UrlLocValidator {
 
   static _validateLength(loc) {
     const sizeLimit = 2048;
-    const rule = loc.length > sizeLimit;
+    const rule = loc.length <= sizeLimit;
 
     return rule ?
       {
