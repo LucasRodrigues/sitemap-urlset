@@ -12,13 +12,24 @@ export default class UrlGenerator {
   }
 
   static _itemGenerate(item) {
+    let innerXml = '';
+
+    if (item.lastmod) {
+      const templateLastMod = `<lastmod>${item.lastmod}</lastmod>`;
+      innerXml += templateLastMod;
+    }
+    if (item.changefreq) {
+      const templateChangeFreq = `<changefreq>${item.changefreq}</changefreq>`;
+      innerXml += templateChangeFreq;
+    }
+    if (item.priority) {
+      const templatePriority = `<priority>${item.priority}</priority>`;
+      innerXml += templatePriority;
+    }
+    innerXml += `<loc>${item.loc}</loc>`;
+
     const template =
-    `<url>
-        <loc>${item.loc}</loc>
-        <lastmod>${item.lastmod}</lastmod>
-        <changefreq>${item.changefreq}</changefreq>
-        <priority>${item.priority}</priority>
-    </url>`;
+    `<url>${innerXml}</url>`;
 
     return template;
   }
