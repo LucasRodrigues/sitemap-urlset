@@ -11,7 +11,7 @@ export default class UrlValidator {
 
     validators.forEach(validator => {
       const validatorResult = validator.validate(item);
-      console.log(validatorResult);
+
       if (!validatorResult.status) {
         result.status = false;
         result.messages.push(validatorResult.messages);
