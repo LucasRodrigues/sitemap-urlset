@@ -1,14 +1,24 @@
+import objectSizeOf from 'object-sizeof';
 
 export default class UrlGenerator {
 
   static generate(items) {
-    let result = '';
+    const sizeLimitInBytes = 9e+6;
+    const results = [];
+    let urls = '';
 
-    items.forEach(item => {
-      result += this._itemGenerate(item);
+    items.forEach((item,index) => {
+      urls += this._itemGenerate(item);
+
+      const isOnLimitSize = (objectSizeOf(urls) >= sizeLimitInBytes);
+      const isLastItem = (index === items.length -1);
+      if (isOnLimitSize || isLastItem){
+        results.push(urls);
+        urls = '';
+      }
     });
 
-    return result;
+    return results;
   }
 
   static _itemGenerate(item) {

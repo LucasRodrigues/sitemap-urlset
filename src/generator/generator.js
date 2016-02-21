@@ -9,8 +9,11 @@ export default class Generator {
     const chunksItems = chunk(items, sizeLimit);
 
     chunksItems.forEach(chunkItem => {
-      const urls = UrlGenerator.generate(chunkItem);
-      urlSets.push(UrlSetGenerator.generate(urls));
+      const results = UrlGenerator.generate(chunkItem);
+
+      results.forEach(result => {
+        urlSets.push(UrlSetGenerator.generate(result));
+      });
     });
 
     return urlSets;
