@@ -1,5 +1,5 @@
 import Validator from './validators/validator';
-import Generator from 'generators/generator';
+import Generator from './generators/generator';
 
 export default class Orchestrator {
 

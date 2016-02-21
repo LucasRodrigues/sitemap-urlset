@@ -4,20 +4,21 @@ export default class UrlValidator {
 
   static validate(item) {
     const validators = UrlValidatorFactory.get();
-    const result = {
-      status: true
+    let result = {
+      status: true,
+      messages: []
     };
 
     validators.forEach(validator => {
       const validatorResult = validator.validate(item);
-
+      console.log(validatorResult);
       if (!validatorResult.status) {
         result.status = false;
-        result.messages = result.messages || [];
-        result.messages.concat(validatorResult.messages);
+        result.messages.push(validatorResult.messages);
       }
     });
 
+    console.log(result);
     return result;
   }
 }
