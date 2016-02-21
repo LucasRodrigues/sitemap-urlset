@@ -7,12 +7,13 @@ export default class UrlGenerator {
     const results = [];
     let urls = '';
 
-    items.forEach((item,index) => {
-      urls += this._itemGenerate(item);
+    items.forEach((item, index) => {
+      urls += this._generateUrl(item);
 
       const isOnLimitSize = (objectSizeOf(urls) >= sizeLimitInBytes);
-      const isLastItem = (index === items.length -1);
-      if (isOnLimitSize || isLastItem){
+      const isLastItem = (index === items.length - 1);
+      const isCutRule = isOnLimitSize || isLastItem;
+      if (isCutRule) {
         results.push(urls);
         urls = '';
       }
@@ -21,26 +22,29 @@ export default class UrlGenerator {
     return results;
   }
 
-  static _itemGenerate(item) {
-    let innerXml = '';
+  static _generateUrl(item) {
+    const contentUrl = this._generatLoc(item) +
+        this._generateChangeFreq(item) + this._generateLastMod(item) +
+        this._generatePriority(item);
 
-    if (item.lastmod) {
-      const templateLastMod = `<lastmod>${item.lastmod}</lastmod>`;
-      innerXml += templateLastMod;
-    }
-    if (item.changefreq) {
-      const templateChangeFreq = `<changefreq>${item.changefreq}</changefreq>`;
-      innerXml += templateChangeFreq;
-    }
-    if (item.priority) {
-      const templatePriority = `<priority>${item.priority}</priority>`;
-      innerXml += templatePriority;
-    }
-    innerXml += `<loc>${item.loc}</loc>`;
-
-    const template =
-    `<url>${innerXml}</url>`;
+    const template = `<url>${contentUrl}</url>`;
 
     return template;
+  }
+
+  static _generateLastMod(item) {
+    return item.lastMod ? `<lastmod>${item.lastMod}</lastmod>` : '';
+  }
+
+  static _generateChangeFreq(item) {
+    return item.changeFreq ? `<changefreq>${item.changeFreq}</changefreq>` : '';
+  }
+
+  static _generatePriority(item) {
+    return item.priority ? `<priority>${item.priority}</priority>` : '';
+  }
+
+  static _generatLoc(item) {
+    return `<loc>${item.loc}</loc>`;
   }
 }
