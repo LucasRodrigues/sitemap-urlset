@@ -18,7 +18,6 @@ export default class UrlValidator {
       }
     });
 
-    console.log(result);
     return result;
   }
 }
